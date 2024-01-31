@@ -66,7 +66,9 @@ const Itemdetails = () => {
         </TableContainer>
     </div>
   if(update)
+  {
   result=<Itemedit data={selected}method='put'/>
+  }
   return(result)
 }
 

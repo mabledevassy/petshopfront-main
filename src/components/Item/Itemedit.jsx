@@ -7,6 +7,8 @@ import Topbar from '../Adminpanel/Topbar'
 import Sidebar from '../Adminpanel/Sidebar'
 
 const Itemedit = (props) => {
+  var[selectedimage,setSelectedimage]=useState(null);
+
     var[ca,setCa]=useState([])
     useEffect(()=>{
       axios.get("http://localhost:3005/categoryview")
@@ -34,16 +36,41 @@ const Itemedit = (props) => {
         setInputs((inputs)=>({...inputs,[name]:value}))
         console.log(inputs)
       }
-      const addHandler=()=>{
-        if(props.method==='put'){
-            axios.put("http://localhost:3005/editi/"+inputs._id,inputs)
-            .then(response=>{
-                console.log("post data"+response.data)
-                alert("Success")
-                window.location.reload(false)
-            })
-            .catch(err=>console.log(err))
-        }
+      const handleImage=(event)=>{
+        const file=event.target.files[0];
+        setSelectedimage(file)
+        inputs.image1=file;
+    }
+      // const addHandler=()=>{
+      //   if(props.method==='put'){
+    
+      //       axios.put("http://localhost:3005/editi/"+inputs._id,inputs)
+      //         .then(response=>{
+      //           console.log("post data"+response.data)
+      //         alert("Success")
+      //           window.location.reload(false)
+      //       })
+      //       .catch(err=>console.log(err))
+      //   }
+      const savedata=()=>{
+        const formdata=new FormData();
+        formdata.append('Category',inputs.Category);
+        formdata.append('Subcategory',inputs.Subcategory);
+        formdata.append('Description',inputs.Description);
+        formdata.append('Price',inputs.Price);
+        formdata.append('image1',selectedimage)
+        fetch('http://localhost:3005/editi',
+        {
+            method:'post',
+            body:formdata,
+        })
+        .then((response)=>response.json())
+        .then((data)=>{
+            alert("record saved")
+        })
+        .catch((err)=>{
+            console.log("error")
+        })
     }
   return (
     <div className='vv'>
@@ -82,7 +109,10 @@ const Itemedit = (props) => {
   <Textarea name="Description" placeholder="Description" variant="outlined" value={inputs.Description} onChange={inputHandler}/>
 </FormControl><br/><br/>
 <TextField label="Price" variant="outlined" name="Price" value={inputs.Price} onChange={inputHandler}/><br/><br/>
-<Button variant="contained" onClick={addHandler} >Update</Button>
+<label>Upload file</label>
+        <input type="file" onChange={handleImage}></input>
+        <br /><br />
+<Button variant="contained" onClick={savedata} >Update</Button>
     </div>
    
   )
