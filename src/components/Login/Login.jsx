@@ -22,7 +22,7 @@ const checkData = async (event) => {
     event.preventDefault(); 
  
     try { 
-     const response = await axios.post("http://localhost:5005/Loginsearch",{ 
+     const response = await axios.post("http://localhost:3005/Loginsearch",{ 
       username: inputs.username, 
       password: inputs.password, 
     }) 

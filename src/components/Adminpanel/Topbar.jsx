@@ -1,6 +1,8 @@
 
 import './Topbar.css'
 import './Home.css'
+import { Link } from '@mui/material'
+import Login from '../Login/Login'
 
 
 const Topbar = (props) => {
@@ -15,7 +17,7 @@ const Topbar = (props) => {
        
         <div className='topright'>
           
-          <button onClick={props.xxx}>Log Out</button>
+          <button><Link to='/'>Log Out</Link></button>
          
         </div>
 

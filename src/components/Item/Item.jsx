@@ -94,7 +94,7 @@ const Item = () => {
       ca.map((value,index)=>{
         return(
           <MenuItem key={index}
-          value={value.Cname} >{value.Cname}</MenuItem>
+          value={value._id} >{value.Cname}</MenuItem>
         )
       })
     }
