@@ -46,9 +46,9 @@ const Itemdetails = () => {
                             <TableRow
                                 key={pos}>
                                 <TableCell>
-                                    {row.Category}
+                                { row.itemca.Cname} 
                                 </TableCell>
-                                <TableCell>{row.Subcategory}</TableCell>
+                                <TableCell>{row.itemsub.Sname}</TableCell>
                                 <TableCell>{row.Description}</TableCell>
                                 <TableCell>{row.Price}</TableCell>
                                 <TableCell>
